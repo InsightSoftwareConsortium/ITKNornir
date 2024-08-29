@@ -56,7 +56,7 @@ static thread_local the_std_thread_storage_t THREAD_STORAGE;
 // 
 the_std_thread_t::the_std_thread_t():
   the_thread_interface_t(the_std_mutex_t::create()),
-  std_thread_(NULL)
+  std_thread_(nullptr)
 {
   if (THREAD_STORAGE.thread_observer_.get() == nullptr)
   {
@@ -152,7 +152,7 @@ the_std_thread_t::wait()
   
   std_thread_->join();
   delete std_thread_;
-  std_thread_ = NULL;
+  std_thread_ = nullptr;
 }
 
 //----------------------------------------------------------------

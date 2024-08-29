@@ -69,7 +69,7 @@ RegularStepGradientDescentOptimizer2::RegularStepGradientDescentOptimizer2()
   , log_(cerr_log())
 {
   itkDebugMacro("Constructor");
-  m_CostFunction = NULL;
+  m_CostFunction = nullptr;
 }
 
 //----------------------------------------------------------------

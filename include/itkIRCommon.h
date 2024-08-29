@@ -685,7 +685,7 @@ pixel_in_mask(const mask_t *                  mask,
       image_size_value_t(mask_index[1]) < mask_size[1])
   {
     // check the mask:
-    return (mask == NULL) ? true : (mask->GetPixel(mask_index) != 0);
+    return (mask == nullptr) ? true : (mask->GetPixel(mask_index) != 0);
   }
 
   // pixel falls outside the mask image:
@@ -701,7 +701,7 @@ template <typename T>
 inline static bool
 pixel_in_mask(const T * mask, const typename T::PointType & physical_point)
 {
-  if (mask == NULL)
+  if (mask == nullptr)
     return true;
 
   typename T::IndexType mask_pixel_index;
@@ -726,7 +726,7 @@ pixel_in_mask(const T *                                            image,
               const itk::Image<unsigned char, T::ImageDimension> * mask,
               const typename T::IndexType &                        image_pixel_index)
 {
-  if (mask == NULL)
+  if (mask == nullptr)
   {
     return true;
   }
@@ -748,7 +748,7 @@ double
 image_min_max(const T *                                            a,
               typename T::PixelType &                              MIN,
               typename T::PixelType &                              MAX,
-              const itk::Image<unsigned char, T::ImageDimension> * mask = NULL)
+              const itk::Image<unsigned char, T::ImageDimension> * mask = nullptr)
 {
   WRAP(itk_terminator_t terminator("image_min_max"));
 
@@ -1222,7 +1222,7 @@ public:
     ValidImages->reserve(num_images);
     for (unsigned int k = 0; k < num_images; k++)
     {
-      if (!(omit[k] || (image[k].GetPointer() == NULL)))
+      if (!(omit[k] || (image[k].GetPointer() == nullptr)))
       {
         ValidImages->push_back(image[k]);
       }
@@ -1579,7 +1579,7 @@ load(const char * filename, bool blab = true)
   {
     cout << "Exception loading " << filename << endl;
     cout << e.GetDescription() << endl;
-    return NULL;
+    return nullptr;
   }
 }
 
@@ -1908,8 +1908,8 @@ double
 eval_metric(const base_transform_t *                   fi_to_mi,
             const typename metric_t::FixedImageType *  fi,
             const typename metric_t::MovingImageType * mi,
-            const mask_t *                             fi_mask = NULL,
-            const mask_t *                             mi_mask = NULL)
+            const mask_t *                             fi_mask = nullptr,
+            const mask_t *                             mi_mask = nullptr)
 {
   typename metric_t::Pointer metric = metric_t::New();
   metric->SetFixedImage(fi);
@@ -1953,12 +1953,12 @@ eval_metric(const base_transform_t *                   fi_to_mi,
 
   metric->SetFixedImageRegion(fi_roi);
 
-  if (fi_mask != NULL)
+  if (fi_mask != nullptr)
   {
     metric->SetFixedImageMask(mask_so(fi_mask));
   }
 
-  if (mi_mask != NULL)
+  if (mi_mask != nullptr)
   {
     metric->SetMovingImageMask(mask_so(mi_mask));
   }
@@ -2503,8 +2503,8 @@ my_metric(double &                 overlap,
           const TImage *           fi,
           const TImage *           mi,
           const base_transform_t * fi_to_mi,
-          const mask_t *           fi_mask = NULL,
-          const mask_t *           mi_mask = NULL,
+          const mask_t *           fi_mask = nullptr,
+          const mask_t *           mi_mask = nullptr,
           const double             min_overlap = 0.05,
           const double             max_overlap = 1.0)
 {
@@ -2559,8 +2559,8 @@ double
 my_metric(const TImage *           fi,
           const TImage *           mi,
           const base_transform_t * fi_to_mi,
-          const mask_t *           fi_mask = NULL,
-          const mask_t *           mi_mask = NULL,
+          const mask_t *           fi_mask = nullptr,
+          const mask_t *           mi_mask = nullptr,
           const double             min_overlap = 0.0,
           const double             max_overlap = 1.0)
 {
@@ -2599,7 +2599,7 @@ calc_image_bboxes(const std::vector<typename IMG::ConstPointer> & image,
     image_max[i][1] = -image_min[i][0];
 
     // it happens:
-    if (image[i].GetPointer() == NULL)
+    if (image[i].GetPointer() == nullptr)
       continue;
 
     // bounding box in the image space:
@@ -2662,7 +2662,7 @@ calc_image_bboxes_load_images(const std::list<the_text_t> & in,
     calc_image_bbox<IMG>(image, image_min[i], image_max[i]);
 
     // Unload the image.
-    image = typename IMG::Pointer(NULL);
+    image = typename IMG::Pointer(nullptr);
   }
 }
 
@@ -2924,7 +2924,7 @@ typedef enum
 // Each tile may be individually tinted with a grayscale color.
 // Individual tiles may be omitted.
 // Background color (outside the mask) may be specified.
-// Tile masks are optional and may be NULL.
+// Tile masks are optional and may be nullptr.
 //
 template <class IMG, class transform_t, class img_interpolator_t>
 typename IMG::Pointer
@@ -2976,11 +2976,11 @@ make_mosaic_st(
   // setup the image mask interpolators:
   typedef itk::NearestNeighborInterpolateImageFunction<mask_t, double> msk_interpolator_t;
   std::vector<typename msk_interpolator_t::Pointer>                    msk(num_images);
-  msk.assign(num_images, typename msk_interpolator_t::Pointer(NULL));
+  msk.assign(num_images, typename msk_interpolator_t::Pointer(nullptr));
 
   for (unsigned int i = 0; i < image_mask.size() && i < num_images; i++)
   {
-    if (image_mask[i].GetPointer() == NULL)
+    if (image_mask[i].GetPointer() == nullptr)
       continue;
 
     msk[i] = msk_interpolator_t::New();
@@ -3004,7 +3004,7 @@ make_mosaic_st(
   mosaic->SetRegions(mosaic_sz);
   mosaic->SetSpacing(mosaic_sp);
 
-  mosaic_mask = NULL;
+  mosaic_mask = nullptr;
   if (assemble_mosaic_mask)
   {
     mosaic_mask = mask_t::New();
@@ -3037,7 +3037,7 @@ make_mosaic_st(
   ValidTilesIndicies.reserve(num_images);
   for (unsigned int k = 0; k < num_images; k++)
   {
-    InvalidTiles[k] = (omit[k] || (image[k].GetPointer() == NULL));
+    InvalidTiles[k] = (omit[k] || (image[k].GetPointer() == nullptr));
     if (!InvalidTiles[k])
     {
       ValidTilesIndicies.push_back(k);
@@ -3090,7 +3090,7 @@ make_mosaic_st(
 
 
         // don't try to add missing or omitted images to the mosaic:
-        //      if (omit[k] || (image[k].GetPointer() == NULL)) continue;
+        //      if (omit[k] || (image[k].GetPointer() == nullptr)) continue;
 
         // avoid undesirable distortion artifacts:
         if (!inside_bbox(MIN[k], MAX[k], point))
@@ -3106,7 +3106,7 @@ make_mosaic_st(
 
         // make sure the pixel maps into the image mask:
         pixel_t alpha = 1.0;
-        if ((msk[k].GetPointer() != NULL) && (alpha = msk[k]->Evaluate(pt_k)) < 1.0)
+        if ((msk[k].GetPointer() != nullptr) && (alpha = msk[k]->Evaluate(pt_k)) < 1.0)
           continue;
 
         // feather out the edges by giving them a tiny weight:
@@ -3260,7 +3260,7 @@ public:
     {
       unsigned int j = SortedTiles[k];
 
-      if (tile[k].GetPointer() == NULL)
+      if (tile[k].GetPointer() == nullptr)
       {
         continue;
       }
@@ -3376,7 +3376,7 @@ public:
 
           // make sure the pixel maps into the image mask:
           pxl_t alpha = 1.0;
-          if ((imask_[k].GetPointer() != NULL) && (alpha = imask_[k]->Evaluate(pt_k)) < 1.0)
+          if ((imask_[k].GetPointer() != nullptr) && (alpha = imask_[k]->Evaluate(pt_k)) < 1.0)
           {
             continue;
           }
@@ -3504,7 +3504,7 @@ public:
 // Each tile may be individually tinted with a grayscale color.
 // Individual tiles may be omitted.
 // Background color (outside the mask) may be specified.
-// Tile masks are optional and may be NULL.
+// Tile masks are optional and may be nullptr.
 //
 template <class IMG, class transform_t, class img_interpolator_t>
 typename IMG::Pointer
@@ -3569,11 +3569,11 @@ make_mosaic_mt(
   // setup the image mask interpolators:
   typedef itk::NearestNeighborInterpolateImageFunction<mask_t, double> msk_interpolator_t;
   std::vector<typename msk_interpolator_t::Pointer>                    msk(num_images);
-  msk.assign(num_images, typename msk_interpolator_t::Pointer(NULL));
+  msk.assign(num_images, typename msk_interpolator_t::Pointer(nullptr));
 
   for (unsigned int i = 0; i < image_mask.size() && i < num_images; i++)
   {
-    if (image_mask[i].GetPointer() == NULL)
+    if (image_mask[i].GetPointer() == nullptr)
       continue;
 
     msk[i] = msk_interpolator_t::New();
@@ -3596,7 +3596,7 @@ make_mosaic_mt(
   mosaic->SetRegions(mosaic_sz);
   mosaic->SetSpacing(mosaic_sp);
 
-  mosaic_mask = NULL;
+  mosaic_mask = nullptr;
   if (assemble_mosaic_mask)
   {
     mosaic_mask = mask_t::New();
@@ -3671,7 +3671,7 @@ make_mosaic_mt(
 // Each tile may be individually tinted with a grayscale color.
 // Individual tiles may be omitted.
 // Background color (outside the mask) may be specified.
-// Tile masks are optional and may be NULL.
+// Tile masks are optional and may be nullptr.
 //
 // Use all possible processors/cores available for multi-threading:
 //
@@ -3969,7 +3969,7 @@ class save_mosaic
 
   save_mosaic()
   {
-    if (_pthread_pool == NULL)
+    if (_pthread_pool == nullptr)
     {
       _pthread_pool = new the_thread_pool_t(NUM_THREADS_FOR_ASYNC_SAVE);
       _pthread_pool->set_idle_sleep_duration(50); // 50 usec
@@ -3979,10 +3979,10 @@ class save_mosaic
 
   ~save_mosaic()
   {
-    if (_pthread_pool != NULL)
+    if (_pthread_pool != nullptr)
     {
       delete _pthread_pool;
-      _pthread_pool = NULL;
+      _pthread_pool = nullptr;
     }
   }
 
@@ -3995,7 +3995,7 @@ public:
         bool                     blab = true)
   {
     typename T::ConstPointer pT = image;
-    if (_pthread_pool == NULL)
+    if (_pthread_pool == nullptr)
     {
       _pthread_pool = new the_thread_pool_t(NUM_THREADS_FOR_ASYNC_SAVE);
       _pthread_pool->set_idle_sleep_duration(50); // 50 usec
@@ -4042,14 +4042,14 @@ public:
   static void
   WaitForAsync()
   {
-    if (_pthread_pool == NULL)
+    if (_pthread_pool == nullptr)
     {
       return;
     }
     else
     {
       _pthread_pool->wait();
-      _pthread_pool = NULL;
+      _pthread_pool = nullptr;
     }
   }
 };
@@ -4111,7 +4111,7 @@ public:
     // feathering to reduce image blurring is optional:
     const feathering_t      feathering = FEATHER_NONE_E,
     typename IMG::PixelType background = 255.0,
-    OUTPUT *                output = NULL,
+    OUTPUT *                output = nullptr,
     the_text_t              saveFileName = "")
     : // If we should save the image to disk, use this filename
     m_num_threads(num_threads)
@@ -4130,7 +4130,7 @@ public:
     , m_pOutput(output)
   {
     m_SaveFileName = saveFileName.text();
-    if (m_pOutput != NULL)
+    if (m_pOutput != nullptr)
     {
       m_pOutput->SaveFileName = saveFileName.text();
     }
@@ -4178,7 +4178,7 @@ public:
     }
 
 
-    if (m_pOutput != NULL)
+    if (m_pOutput != nullptr)
     {
       m_pOutput->mosaic = mosaic;
 
@@ -4208,8 +4208,8 @@ typename T::Pointer
 update_mosaic(const T *                mosaic,
               const T *                tile,
               const base_transform_t * tile_transform,
-              const mask_t *           mask_mosaic = NULL,
-              const mask_t *           mask_tile = NULL)
+              const mask_t *           mask_mosaic = nullptr,
+              const mask_t *           mask_tile = nullptr)
 {
   std::vector<typename T::ConstPointer> image(2);
   image[0] = mosaic;
@@ -4256,11 +4256,11 @@ make_mask_st(const mask_t::SpacingType &                             mosaic_sp,
   // setup the image mask interpolators:
   typedef itk::NearestNeighborInterpolateImageFunction<mask_t, double> msk_interpolator_t;
   std::vector<typename msk_interpolator_t::Pointer>                    msk(num_images);
-  msk.assign(num_images, typename msk_interpolator_t::Pointer(NULL));
+  msk.assign(num_images, typename msk_interpolator_t::Pointer(nullptr));
 
   for (unsigned int i = 0; i < image_mask.size() && i < num_images; i++)
   {
-    if (image_mask[i].GetPointer() == NULL)
+    if (image_mask[i].GetPointer() == nullptr)
       continue;
 
     msk[i] = msk_interpolator_t::New();
@@ -4310,7 +4310,7 @@ make_mask_st(const mask_t::SpacingType &                             mosaic_sp,
     for (unsigned int k = 0; k < num_images; k++)
     {
       // don't try to add missing or omitted images to the mosaic:
-      if (omit[k] || (image_mask[k].GetPointer() == NULL))
+      if (omit[k] || (image_mask[k].GetPointer() == nullptr))
         continue;
 
       // avoid undesirable radial distortion artifacts for R >> Rmax:
@@ -4549,11 +4549,11 @@ make_mask_mt(unsigned int                                            num_threads
   // setup the image mask interpolators:
   typedef itk::NearestNeighborInterpolateImageFunction<mask_t, double> imask_t;
   std::vector<typename imask_t::Pointer>                               imask(num_images);
-  imask.assign(num_images, typename imask_t::Pointer(NULL));
+  imask.assign(num_images, typename imask_t::Pointer(nullptr));
 
   for (unsigned int i = 0; i < image_mask.size() && i < num_images; i++)
   {
-    if (image_mask[i].GetPointer() == NULL)
+    if (image_mask[i].GetPointer() == nullptr)
       continue;
 
     imask[i] = imask_t::New();
@@ -4822,7 +4822,7 @@ save_composite(const char * filename, const T * fi, const T * mi, const base_tra
 // Each tile may be individually tinted with an RGB color.
 // Individual tiles may be omitted.
 // Background color (outside the mask) may be specified.
-// Tile masks are optional and may be NULL.
+// Tile masks are optional and may be nullptr.
 //
 template <class IMG, class transform_t>
 void
@@ -4877,7 +4877,7 @@ make_mosaic_rgb(typename IMG::Pointer *                                 mosaic,
 // Each tile may be individually tinted with an RGB color.
 // Individual tiles may be omitted.
 // Background color (outside the mask) may be specified.
-// Tile masks are optional and may be NULL.
+// Tile masks are optional and may be nullptr.
 //
 template <class IMG, class transform_t>
 void
@@ -4912,7 +4912,7 @@ make_mosaic_rgb(typename IMG::Pointer *                                 mosaic,
 // Each tile may be individually tinted with an RGB color.
 // Individual tiles may be omitted.
 // Background color (outside the mask) may be specified.
-// Tile masks are optional and may be NULL.
+// Tile masks are optional and may be nullptr.
 //
 template <class IMG, class transform_t>
 void
@@ -4957,7 +4957,7 @@ make_colors(const unsigned int & num_color, std::vector<xyz_t> & color);
 // from a scrambled rainbox colormap.
 // Individual tiles may be omitted.
 // Background color (outside the mask) may be specified.
-// Tile masks are optional and may be NULL.
+// Tile masks are optional and may be nullptr.
 //
 template <class IMG, class transform_t>
 void
@@ -5013,7 +5013,7 @@ make_mosaic_rgb(typename IMG::Pointer *                                 mosaic,
 // Each tile will be tinted with an RGB color
 // from a scrambled rainbox colormap.
 // Background color (outside the mask) may be specified.
-// Tile masks are optional and may be NULL.
+// Tile masks are optional and may be nullptr.
 //
 template <class IMG, class transform_t>
 void
@@ -5087,7 +5087,7 @@ save_rgb(const image_ptr_t * image, const char * filename, bool blab = true)
 // Each tile will be tinted with an RGB color
 // from a scrambled rainbox colormap.
 // Background color (outside the mask) may be specified.
-// Tile masks are optional and may be NULL.
+// Tile masks are optional and may be nullptr.
 //
 // Save the resulting mosaic
 //
@@ -5499,7 +5499,7 @@ histogram_equalization(const T *             in,
                        const unsigned int    bins = 256,
                        typename T::PixelType new_min = std::numeric_limits<typename T::PixelType>::max(),
                        typename T::PixelType new_max = -std::numeric_limits<typename T::PixelType>::max(),
-                       const mask_t *        mask = NULL)
+                       const mask_t *        mask = nullptr)
 {
   // local typedefs:
   typedef typename T::RegionType rn_t;
@@ -5612,7 +5612,7 @@ CLAHE(const T *             in,
       const unsigned int    bins = 256,
       typename T::PixelType new_min = std::numeric_limits<typename T::PixelType>::max(),
       typename T::PixelType new_max = -std::numeric_limits<typename T::PixelType>::max(),
-      const mask_t *        mask = NULL)
+      const mask_t *        mask = nullptr)
 {
   // local typedefs:
   typedef typename T::RegionType rn_t;
@@ -5932,7 +5932,7 @@ normalize(const T *             image,
           const unsigned int    rows,
           typename T::PixelType new_min = std::numeric_limits<typename T::PixelType>::max(),
           typename T::PixelType new_max = -std::numeric_limits<typename T::PixelType>::max(),
-          const mask_t *        mask = NULL)
+          const mask_t *        mask = nullptr)
 {
   WRAP(itk_terminator_t terminator("normalize"));
 
@@ -6141,7 +6141,7 @@ template <typename T>
 double
 overlap_ratio(const T * fi, const T * mi, const base_transform_t * fi_to_mi)
 {
-  if (fi_to_mi == NULL)
+  if (fi_to_mi == nullptr)
     return 0.0;
 
   typename T::PointType fi_min = fi->GetOrigin();
@@ -6466,7 +6466,7 @@ solve_for_transform(const T *                                tile,
 {
   base_transform_t::Pointer tile_to_mosaic;
   mosaic_to_tile_0->GetInverse(tile_to_mosaic);
-  assert(tile_to_mosaic.GetPointer() != NULL);
+  assert(tile_to_mosaic.GetPointer() != nullptr);
 
   typename T::SizeType    sz = tile->GetLargestPossibleRegion().GetSize();
   typename T::SpacingType sp = tile->GetSpacing();
@@ -6685,7 +6685,7 @@ load_volume_slice(std::istream &                  si,
 
       itk::TransformBase::Pointer t_base = load_transform(si);
       transform = dynamic_cast<transform_t *>(t_base.GetPointer());
-      assert(transform.GetPointer() != NULL);
+      assert(transform.GetPointer() != nullptr);
     }
     else
     {

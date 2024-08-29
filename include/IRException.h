@@ -41,18 +41,18 @@
 class the_exception_t : public std::exception
 {
 public:
-  the_exception_t(const char * description = NULL,
-		  const char * file = NULL,
+  the_exception_t(const char * description = nullptr,
+		  const char * file = nullptr,
 		  const unsigned int & line = 0)
   {
     std::ostringstream os;
     
-    if (file != NULL)
+    if (file != nullptr)
     {
       os << file << ':' << line << " -- ";
     }
     
-    if (description != NULL)
+    if (description != nullptr)
     {
       os << description;
     }

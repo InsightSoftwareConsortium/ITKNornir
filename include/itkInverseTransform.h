@@ -100,7 +100,7 @@ namespace itk
     /**  Method to transform a point. */
     virtual OutputPointType TransformPoint(const InputPointType & y) const
     {
-      assert(forward_ != NULL);
+      assert(forward_ != nullptr);
       return forward_->BackTransformPoint(y);
     }
     

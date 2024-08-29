@@ -131,8 +131,8 @@ estimate_displacement(the_log_t & log,
                       const local_max_t & lm,
                       const double        overlap_min = 0.05,
                       const double        overlap_max = 1.0,
-                      const mask_t *      mask_a = NULL,
-                      const mask_t *      mask_b = NULL,
+                      const mask_t *      mask_a = nullptr,
+                      const mask_t *      mask_b = nullptr,
 
                       const unsigned int num_perms = 4)
 {
@@ -271,7 +271,7 @@ match_one_pair(the_log_t &                      log,
                const bool &       consider_zero_displacement)
 {
   static const vec2d_t offset = vec2d(0, 0);
-  best_transform = NULL;
+  best_transform = nullptr;
 
   std::list<local_max_t> max_list;
   unsigned int           total_peaks =
@@ -379,7 +379,7 @@ match_one_pair(the_log_t &                      log,
                const unsigned int max_peaks,
                const bool &       consider_zero_displacement)
 {
-  best_transform = NULL;
+  best_transform = nullptr;
 
   std::list<local_max_t> max_list;
   unsigned int           total_peaks =
@@ -845,7 +845,7 @@ extract(const typename TImage::PointType & origin,
     if (interpolator->IsInsideBuffer(tile_pt))
     {
       mask_val = mask_max;
-      if (mask != NULL)
+      if (mask != nullptr)
       {
         mask->TransformPhysicalPointToIndex(tile_pt, mask_ix);
         mask_val = mask->GetPixel(mask_ix);
@@ -1086,7 +1086,7 @@ refine_one_point_helper( // the large images and their masks:
     return false;
   }
 
-  if (img_0_large != NULL)
+  if (img_0_large != nullptr)
   {
     // extract the larger neighborhood from the fixed tile:
     pnt2d_t origin_large(center);
@@ -1283,8 +1283,8 @@ refine_one_point_fft(the_log_t & log,
                                        min_overlap,
                                        sz,
                                        sp,
-                                       NULL,
-                                       NULL,
+                                       nullptr,
+                                       nullptr,
                                        img_0,
                                        msk_0,
                                        img_1,
@@ -1367,7 +1367,7 @@ refine_one_pair(the_log_t & log,
   // setup the masks:
   typedef itk::ImageMaskSpatialObject<2> mask_so_t;
   mask_t::ConstPointer                   fi_mask = m0;
-  if (m0 != NULL)
+  if (m0 != nullptr)
   {
     mask_so_t::Pointer fi_mask_so = mask_so_t::New();
     fi_mask_so->SetImage(fi_mask);
@@ -1375,7 +1375,7 @@ refine_one_pair(the_log_t & log,
   }
 
   mask_t::ConstPointer mi_mask = m1;
-  if (m1 != NULL)
+  if (m1 != nullptr)
   {
     mask_so_t::Pointer mi_mask_so = mask_so_t::New();
     mi_mask_so->SetImage(mi_mask);

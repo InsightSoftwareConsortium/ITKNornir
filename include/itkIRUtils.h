@@ -745,7 +745,7 @@ public:
   
   inline void arm()
   {
-    if (!armed_ && lock_ != NULL)
+    if (!armed_ && lock_ != nullptr)
     {
       lock_->lock();
       armed_ = true;
@@ -754,7 +754,7 @@ public:
   
   inline void disarm()
   {
-    if (armed_ && lock_ != NULL)
+    if (armed_ && lock_ != nullptr)
     {
       lock_->unlock();
       armed_ = false;
@@ -780,7 +780,7 @@ public:
   the_unlock_t(T * lock):
     lock_(lock)
   {
-    if (lock_ != NULL)
+    if (lock_ != nullptr)
     {
       assert(lock_->try_lock() == false);
     }
@@ -789,7 +789,7 @@ public:
   the_unlock_t(T & lock):
     lock_(&lock)
   {
-    if (lock_ != NULL)
+    if (lock_ != nullptr)
     {
       assert(lock_->try_lock() == false);
     }
@@ -797,7 +797,7 @@ public:
   
   ~the_unlock_t()
   {
-    if (lock_ != NULL)
+    if (lock_ != nullptr)
     {
       lock_->unlock();
     }

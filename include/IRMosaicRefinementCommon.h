@@ -1135,7 +1135,7 @@ refine_mosaic(the_log_t &                                         log,
         log << setw(4) << i << ". warping image tile" << endl;
         warped_tile[i] = warp<image_t>((typename image_t::ConstPointer)tile[i], transform[i].GetPointer());
 
-        if (mask[i].GetPointer() != NULL)
+        if (mask[i].GetPointer() != nullptr)
         {
           log << "      warping image tile mask" << endl;
           warped_mask[i] = warp<mask_t>((typename mask_t::ConstPointer)mask[i], transform[i].GetPointer());
@@ -1243,7 +1243,7 @@ public:
     log_ << setw(4) << tile_index_ << ". warping image tile" << endl;
     warped_tile_[tile_index_] = warp<image_t>(tile_, transform_.GetPointer());
 
-    if (mask_.GetPointer() != NULL)
+    if (mask_.GetPointer() != nullptr)
     {
       log_ << setw(4) << tile_index_ << ". warping image tile mask" << endl;
       warped_mask_[tile_index_] = warp<mask_t>(mask_, transform_.GetPointer());
@@ -1483,7 +1483,7 @@ refine_mosaic_mt(the_log_t &                                         log, // tex
     image_duplicator->Update();
     warped_tile[i] = image_duplicator->GetOutput();
 
-    if (mask[i].GetPointer() != NULL)
+    if (mask[i].GetPointer() != nullptr)
     {
       mask_duplicator->SetInputImage(mask[i]);
       mask_duplicator->Update();

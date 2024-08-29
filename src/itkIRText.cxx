@@ -44,7 +44,7 @@
 // the_text_t::the_text_t
 // 
 the_text_t::the_text_t(const char * text):
-  text_(NULL),
+  text_(nullptr),
   size_(0)
 {
   assign(text);
@@ -54,7 +54,7 @@ the_text_t::the_text_t(const char * text):
 // the_text_t::the_text_t
 // 
 the_text_t::the_text_t(const char * text, const size_t & size):
-  text_(NULL),
+  text_(nullptr),
   size_(0)
 {
   assign(text, size);
@@ -64,7 +64,7 @@ the_text_t::the_text_t(const char * text, const size_t & size):
 // the_text_t::the_text_t
 // 
 the_text_t::the_text_t(const the_text_t & text):
-  text_(NULL),
+  text_(nullptr),
   size_(0)
 {
   assign(text.text_, text.size_);
@@ -74,7 +74,7 @@ the_text_t::the_text_t(const the_text_t & text):
 // the_text_t::the_text_t
 // 
 the_text_t::the_text_t(const std::list<char> & text):
-  text_(NULL),
+  text_(nullptr),
   size_(text.size())
 {
   text_ = new char [size_ + 1];
@@ -160,7 +160,7 @@ short int
 the_text_t::toShort(bool * ok, int base) const
 {
   long int num = toULong(ok, base);
-  if (ok != NULL) *ok &= ((num >= SHRT_MIN) && (num <= SHRT_MAX));
+  if (ok != nullptr) *ok &= ((num >= SHRT_MIN) && (num <= SHRT_MAX));
   return (short int)(num);
 }
 
@@ -171,7 +171,7 @@ unsigned short int
 the_text_t::toUShort(bool * ok, int base) const
 {
   unsigned long int num = toULong(ok, base);
-  if (ok != NULL) *ok &= (num <= USHRT_MAX);
+  if (ok != nullptr) *ok &= (num <= USHRT_MAX);
   return (unsigned short int)(num);
 }
 
@@ -182,7 +182,7 @@ int
 the_text_t::toInt(bool * ok, int base) const
 {
   long int num = toULong(ok, base);
-  if (ok != NULL) *ok &= ((num >= INT_MIN) && (num <= INT_MAX));
+  if (ok != nullptr) *ok &= ((num >= INT_MIN) && (num <= INT_MAX));
   return int(num);
 }
 
@@ -193,7 +193,7 @@ unsigned int
 the_text_t::toUInt(bool * ok, int base) const
 {
   unsigned long int num = toULong(ok, base);
-  if (ok != NULL) *ok &= (num <= UINT_MAX);
+  if (ok != nullptr) *ok &= (num <= UINT_MAX);
   return (unsigned int)(num);
 }
 
@@ -203,9 +203,9 @@ the_text_t::toUInt(bool * ok, int base) const
 long int
 the_text_t::toLong(bool * ok, int base) const
 {
-  char * endptr = NULL;
+  char * endptr = nullptr;
   long int num = strtol(text_, &endptr, base);
-  if (ok != NULL) *ok = !(text_ == endptr || errno == ERANGE);
+  if (ok != nullptr) *ok = !(text_ == endptr || errno == ERANGE);
   return num;
 }
 
@@ -215,9 +215,9 @@ the_text_t::toLong(bool * ok, int base) const
 unsigned long int
 the_text_t::toULong(bool * ok, int base) const
 {
-  char * endptr = NULL;
+  char * endptr = nullptr;
   unsigned long int num = strtoul(text_, &endptr, base);
-  if (ok != NULL) *ok = !(text_ == endptr || errno == ERANGE);
+  if (ok != nullptr) *ok = !(text_ == endptr || errno == ERANGE);
   return num;
 }
 
@@ -237,9 +237,9 @@ the_text_t::toFloat(bool * ok) const
 double
 the_text_t::toDouble(bool * ok) const
 {
-  char * endptr = NULL;
+  char * endptr = nullptr;
   double num = strtod(text_, &endptr);
-  if (ok != NULL) *ok = !(text_ == endptr || errno == ERANGE);
+  if (ok != nullptr) *ok = !(text_ == endptr || errno == ERANGE);
   return num;
 }
 

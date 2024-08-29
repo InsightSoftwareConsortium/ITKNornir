@@ -112,7 +112,7 @@ namespace the
 			  0,	   // flags (precomposed, composite,... )
 			  utf8,    // source multi-byte character string
 			  -1,	   // number of bytes in the source string
-			  NULL,	   // wide-character destination
+			  nullptr,	   // wide-character destination
 			  0);	   // destination buffer size
     
     utf16 = new wchar_t[wcs_size + 1];
@@ -178,13 +178,13 @@ namespace the
   FILE *
   fopen_utf8(const char * filename_utf8, const char * mode)
   {
-    FILE * file = NULL;
+    FILE * file = nullptr;
     
 #ifdef _WIN32
-    wchar_t * filename_utf16 = NULL;
+    wchar_t * filename_utf16 = nullptr;
     utf8_to_utf16(filename_utf8, filename_utf16);
     
-    wchar_t * mode_utf16 = NULL;
+    wchar_t * mode_utf16 = nullptr;
     utf8_to_utf16(mode, mode_utf16);
     
     _wfopen_s(&file, filename_utf16, mode_utf16);
@@ -204,10 +204,10 @@ namespace the
   rename_utf8(const char * old_utf8, const char * new_utf8)
   {
 #ifdef _WIN32
-    wchar_t * old_utf16 = NULL;
+    wchar_t * old_utf16 = nullptr;
     utf8_to_utf16(old_utf8, old_utf16);
     
-    wchar_t * new_utf16 = NULL;
+    wchar_t * new_utf16 = nullptr;
     utf8_to_utf16(new_utf8, new_utf16);
     
     int ret = _wrename(old_utf16, new_utf16);
@@ -229,7 +229,7 @@ namespace the
   remove_utf8(const char * filename_utf8)
   {
 #ifdef _WIN32
-    wchar_t * filename_utf16 = NULL;
+    wchar_t * filename_utf16 = nullptr;
     utf8_to_utf16(filename_utf8, filename_utf16);
     
     int ret = _wremove(filename_utf16);
@@ -249,7 +249,7 @@ namespace the
   rmdir_utf8(const char * dir_utf8)
   {
 #ifdef _WIN32
-    wchar_t * dir_utf16 = NULL;
+    wchar_t * dir_utf16 = nullptr;
     utf8_to_utf16(dir_utf8, dir_utf16);
     
     int ret = _wrmdir(dir_utf16);
@@ -269,7 +269,7 @@ namespace the
   mkdir_utf8(const char * path_utf8)
   {
 #ifdef _WIN32
-    wchar_t * path_utf16 = NULL;
+    wchar_t * path_utf16 = nullptr;
     utf8_to_utf16(path_utf8, path_utf16);
     
     int ret = _wmkdir(path_utf16);

@@ -54,14 +54,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 namespace itk_fft
 {
-	// static the_mutex_interface_t * mutex = NULL; 
+	// static the_mutex_interface_t * mutex = nullptr; 
 	// //----------------------------------------------------------------
 	// // fftw_mutex
 	// // 
 	// static the_mutex_interface_t *
 	// 	fftw_mutex()
 	// {
-	// 	if(mutex == NULL)
+	// 	if(mutex == nullptr)
 	// 		mutex = the_mutex_interface_t::create();
 	// 	return mutex;
 	// }
@@ -96,13 +96,13 @@ namespace itk_fft
 	// {
 	// public:
 	// 	fft_cache_t():
-	// 	  fwd_(NULL),
-	// 		  inv_(NULL),
+	// 	  fwd_(nullptr),
+	// 		  inv_(nullptr),
 	// 		  w_(0),
 	// 		  h_(0),
 	// 		  h_complex_(0),
 	// 		  h_padded_(0),
-	// 		  buffer_(NULL)
+	// 		  buffer_(nullptr)
 	// 	  {}
 
 	// 	  ~fft_cache_t()
@@ -118,13 +118,13 @@ namespace itk_fft
 	// 			//   the_lock_t<the_mutex_interface_t> lock(fftw_mutex());
 
 	// 			  fftwf_destroy_plan(fwd_);
-	// 			  fwd_ = NULL;
+	// 			  fwd_ = nullptr;
 
 	// 			  fftwf_destroy_plan(inv_);
-	// 			  inv_ = NULL;
+	// 			  inv_ = nullptr;
 
 	// 			  fftwf_free(buffer_);
-	// 			  buffer_ = NULL;
+	// 			  buffer_ = nullptr;
 	// 		  }
 
 	// 		  w_ = 0;
@@ -269,8 +269,8 @@ namespace itk_fft
 	void
 		fft_data_t::cleanup()
 	{
-		// if (data_ != NULL) fftwf_free((fft_complex_t *)(data_));
-		// data_ = NULL;
+		// if (data_ != nullptr) fftwf_free((fft_complex_t *)(data_));
+		// data_ = nullptr;
 		nx_ = 0;
 		ny_ = 0;
 	}
@@ -285,9 +285,9 @@ namespace itk_fft
 		const unsigned int old_sz = nx_ * ny_;
 		if (old_sz == new_sz) return;
 
-		// if (data_ != NULL) fftwf_free((fft_complex_t *)(data_));
+		// if (data_ != nullptr) fftwf_free((fft_complex_t *)(data_));
 		// data_ = (fft_complex_t *)(fftwf_malloc(new_sz * sizeof(fft_complex_t)));
-		// assert(data_ != NULL);
+		// assert(data_ != nullptr);
 		image_->SetRegions({ w, h });
 		image_->Allocate();
 

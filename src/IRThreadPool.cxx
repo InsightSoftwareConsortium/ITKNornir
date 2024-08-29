@@ -57,7 +57,7 @@ the_transaction_wrapper_t(const unsigned int & num_parts,
   cb_data_(transaction->notify_cb_data_),
   num_parts_(num_parts)
 {
-  assert(mutex_ != NULL);
+  assert(mutex_ != nullptr);
   
   for (unsigned int i = 0; i <= the_transaction_t::DONE_E; i++)
   {
@@ -72,7 +72,7 @@ the_transaction_wrapper_t(const unsigned int & num_parts,
 the_transaction_wrapper_t::~the_transaction_wrapper_t()
 {
   mutex_->delete_this();
-  mutex_ = NULL;
+  mutex_ = nullptr;
 }
 
 //----------------------------------------------------------------
@@ -110,7 +110,7 @@ the_transaction_wrapper_t::notify(the_transaction_t * t,
   {
     case the_transaction_t::PENDING_E:
     case the_transaction_t::STARTED_E:
-      if (notified_[s] == 1 && num_terminal_notifications == 0 && cb_ != NULL)
+      if (notified_[s] == 1 && num_terminal_notifications == 0 && cb_ != nullptr)
       {
 	cb_(cb_data_, t, s);
       }
@@ -136,7 +136,7 @@ the_transaction_wrapper_t::notify(the_transaction_t * t,
 	    t->set_state(state);
 	  }
 	  
-	  if (cb_ != NULL)
+	  if (cb_ != nullptr)
 	  {
 	    cb_(cb_data_, t, t->state());
 	  }
@@ -165,7 +165,7 @@ the_thread_pool_t::the_thread_pool_t(unsigned int num_threads):
   pool_size_(num_threads)
 {
   mutex_ = the_mutex_interface_t::create();
-  assert(mutex_ != NULL);
+  assert(mutex_ != nullptr);
   
   pool_ = new the_thread_pool_data_t[num_threads];
   for (unsigned int i = 0; i < num_threads; i++)
@@ -173,7 +173,7 @@ the_thread_pool_t::the_thread_pool_t(unsigned int num_threads):
     pool_[i].id_ = i;
     pool_[i].parent_ = this;
     pool_[i].thread_ = the_thread_interface_t::create();
-    assert(pool_[i].thread_ != NULL);
+    assert(pool_[i].thread_ != nullptr);
     pool_[i].thread_->set_thread_pool_cb(this, &pool_[i]);
     
     // mark the thread as idle, initially:
@@ -187,10 +187,10 @@ the_thread_pool_t::the_thread_pool_t(unsigned int num_threads):
 the_thread_pool_t::~the_thread_pool_t()
 {
   mutex_->delete_this();
-  mutex_ = NULL;
+  mutex_ = nullptr;
   
   delete [] pool_;
-  pool_ = NULL;
+  pool_ = nullptr;
   pool_size_ = 0;
 }
 
@@ -307,13 +307,13 @@ wrap(the_transaction_t * transaction,
      the_thread_pool_t * pool,
      bool multithreaded)
 {
-  if (transaction->notify_cb() == NULL)
+  if (transaction->notify_cb() == nullptr)
   {
     // override the callback:
     transaction->set_notify_cb(::notify_cb, pool);
   }
   
-  if (transaction->status_cb() == NULL)
+  if (transaction->status_cb() == nullptr)
   {
     // override the callback:
     transaction->set_status_cb(::status_cb, pool);

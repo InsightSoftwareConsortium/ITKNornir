@@ -48,7 +48,7 @@ public:
   // virtual: check whether the thread storage has been initialized:
   bool is_ready() const
   {
-    // return (std::thread_specific_ptr<the_thread_observer_t>::get() != NULL);
+    // return (std::thread_specific_ptr<the_thread_observer_t>::get() != nullptr);
     return true;
   }
   

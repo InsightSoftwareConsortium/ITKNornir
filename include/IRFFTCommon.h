@@ -303,8 +303,8 @@ estimate_displacement(the_log_t &                      log,
                       image_t::PointType               offset_max,
                       const double                     overlap_min = 0.0,
                       const double                     overlap_max = 1.0,
-                      const mask_t *                   mask_a = NULL,
-                      const mask_t *                   mask_b = NULL)
+                      const mask_t *                   mask_a = nullptr,
+                      const mask_t *                   mask_b = nullptr)
 {
   // FIXME:
 #ifdef DEBUG_PDF
@@ -427,7 +427,7 @@ match_one_pair(the_log_t &    log,
   DEBUG_COUNTER1++;
 #endif
 
-  ti = NULL;
+  ti = nullptr;
 
   unsigned int total_peaks = 0;
   if (use_std_mask)

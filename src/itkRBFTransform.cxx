@@ -148,7 +148,7 @@ RBFTransform::GetInverse() const
   tile_max[1] = GetYmax() * 2;
 
   RBFTransform::Pointer inverse = RBFTransform::New();
-  inverse->setup(tile_min, tile_max, num_pts, num_pts ? &(xy_vec[0]) : NULL, num_pts ? &(uv_vec[0]) : NULL);
+  inverse->setup(tile_min, tile_max, num_pts, num_pts ? &(xy_vec[0]) : nullptr, num_pts ? &(uv_vec[0]) : nullptr);
 
   return inverse.GetPointer();
 }

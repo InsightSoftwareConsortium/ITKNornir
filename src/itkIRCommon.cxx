@@ -180,7 +180,7 @@ load_transform(std::istream & si, const std::string & transform_type)
 
   itk::TransformBase::Pointer t = dynamic_cast<itk::TransformBase *>(tmp.GetPointer());
 
-  if (t.GetPointer() == NULL)
+  if (t.GetPointer() == nullptr)
   {
     cerr << "could not instantiate " << transform_type << ", giving up ..." << endl;
     return t;
@@ -714,13 +714,13 @@ find_inverse(const pnt2d_t &          tile_min, // tile space
              const unsigned int       pick_up_pace_steps)
 {
   // #define DEBUG_FIND_INVERSE
-  if (tile_to_mosaic == NULL)
+  if (tile_to_mosaic == nullptr)
   {
     return false;
   }
 
   const itk::GridTransform * gridTransform = dynamic_cast<const itk::GridTransform *>(tile_to_mosaic);
-  if (gridTransform != NULL)
+  if (gridTransform != nullptr)
   {
     // special case for the grid transform -- the inverse is either exact
     // or it doesn't exist (maps to extreme coordinates):
@@ -866,13 +866,13 @@ find_inverse(const base_transform_t * mosaic_to_tile,
              const unsigned int       pick_up_pace_steps)
 {
   // #define DEBUG_FIND_INVERSE
-  if (tile_to_mosaic == NULL)
+  if (tile_to_mosaic == nullptr)
   {
     return false;
   }
 
-  if (dynamic_cast<const itk::GridTransform *>(tile_to_mosaic) != NULL ||
-      dynamic_cast<const itk::MeshTransform *>(tile_to_mosaic) != NULL)
+  if (dynamic_cast<const itk::GridTransform *>(tile_to_mosaic) != nullptr ||
+      dynamic_cast<const itk::MeshTransform *>(tile_to_mosaic) != nullptr)
   {
     // special case for the grid transform -- the inverse is either exact
     // or it doesn't exist (maps to extreme coordinates):

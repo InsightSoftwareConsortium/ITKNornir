@@ -34,7 +34,7 @@
 // the_log_t::the_log_t
 // 
 the_log_t::the_log_t():
-  mutex_(NULL)
+  mutex_(nullptr)
 {
   mutex_ = the_mutex_interface_t::create();
 }
@@ -158,8 +158,8 @@ the_log_t::copyfmt(std::ostream & ostm)
 the_null_log_t *
 null_log()
 {
-  static the_null_log_t * log = NULL;
-  if (log == NULL)
+  static the_null_log_t * log = nullptr;
+  if (log == nullptr)
   {
     log = new the_null_log_t;
   }
@@ -174,8 +174,8 @@ null_log()
 the_stream_log_t *
 cerr_log()
 {
-  static the_stream_log_t * log = NULL;
-  if (log == NULL)
+  static the_stream_log_t * log = nullptr;
+  if (log == nullptr)
   {
     log = new the_stream_log_t(std::cerr);
   }
@@ -190,8 +190,8 @@ cerr_log()
 the_stream_log_t *
 cout_log()
 {
-  static the_stream_log_t * log = NULL;
-  if (log == NULL)
+  static the_stream_log_t * log = nullptr;
+  if (log == nullptr)
   {
     log = new the_stream_log_t(std::cout);
   }

@@ -68,7 +68,7 @@ public:
   inline void clear()
   {
     delete [] text_;
-    text_ = NULL;
+    text_ = nullptr;
     size_ = 0;
   }
   
@@ -192,16 +192,16 @@ public:
   }
   
   short int                toShort(bool * ok = 0, int base = 10) const;
-  unsigned short int        toUShort(bool * ok = NULL, int base = 10) const;
+  unsigned short int        toUShort(bool * ok = nullptr, int base = 10) const;
   
-  int                        toInt(bool * ok = NULL, int base = 10) const;
-  unsigned int                toUInt(bool * ok = NULL, int base = 10) const;
+  int                        toInt(bool * ok = nullptr, int base = 10) const;
+  unsigned int                toUInt(bool * ok = nullptr, int base = 10) const;
   
-  long int                toLong(bool * ok = NULL, int base = 10) const;
-  unsigned long int        toULong(bool * ok = NULL, int base = 10) const;
+  long int                toLong(bool * ok = nullptr, int base = 10) const;
+  unsigned long int        toULong(bool * ok = nullptr, int base = 10) const;
   
-  float                        toFloat(bool * ok = NULL) const;
-  double                toDouble(bool * ok = NULL) const;
+  float                        toFloat(bool * ok = nullptr) const;
+  double                toDouble(bool * ok = nullptr) const;
 
   void to_ascii();
   void to_lower();
